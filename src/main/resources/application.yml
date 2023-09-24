@@ -1,0 +1,24 @@
+spring:
+  h2:
+    console.enabled: true
+  datasource:
+    url: jdbc:h2:file:/dbs/db
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+  application:
+    name: Bootstrap Spring Boot
+  sql:
+    init:
+      platform: h2
+      mode: never
+# jdbc:h2:file:/data/demo
