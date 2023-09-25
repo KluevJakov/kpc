@@ -1,6 +1,7 @@
 let editBtn = document.getElementById("edit");
 let deleteBtn = document.getElementById("delete");
 let uploadBtn = document.getElementById("avatar");
+let photo = document.getElementById("photo");
 var itemId = null;
 
 var myModal = document.getElementById('createModal');
@@ -18,6 +19,7 @@ myModal.addEventListener('shown.bs.modal', function () {
 
         if (xhr.status == 200) {
             let response = JSON.parse(xhr.responseText);
+            photo.src = response.avatar;
             document.getElementById("fio").value = response.fio;
             document.getElementById("birthday").value = response.birthday.substr(0, 10);
             document.getElementById("phone").value = response.phone;
@@ -120,6 +122,7 @@ function showButtons() {
 }
 
 function clearFields() {
+    photo.src = "#";
     document.getElementById("fio").value = "";
     document.getElementById("birthday").value = "";
     document.getElementById("phone").value = "";
