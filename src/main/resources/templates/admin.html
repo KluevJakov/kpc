@@ -25,7 +25,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="text" id="name" placeholder="Название диагноза" class="form-control mb-2">
+                <input type="text" id="fio" placeholder="ФИО" class="form-control mb-2">
+                <input type="date" id="birthday" placeholder="День рождения" class="form-control mb-2">
+                <input type="tel" id="phone" placeholder="Телефон" class="form-control mb-2">
+                <input type="email" id="email" placeholder="Email" class="form-control mb-2">
+                <input type="password" id="password" placeholder="Пароль" class="form-control mb-2">
+                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" placeholder="Фото профиля" class="form-control mb-2">
+                <input type="checkbox" id="activated" class="form-check-input mb-2 mt-2">
+                <label class="form-check-label" for="activated">Активирован?</label>
+                <select class="form-select" id="role">
+                    <option value="" disabled selected>Выберете роль пользователя</option>
+                    <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.nameLocalization}"></option>
+                </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="save()">Сохранить</button>
@@ -80,7 +91,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${users}">
+            <tr th:each="user : ${users}" th:value="${user.id}" onclick="selectRow(event)">
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.fio}"></td>
                 <td th:text="${user.birthday}"></td>

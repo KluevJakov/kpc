@@ -80,7 +80,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="animal : ${animals}">
+            <tr th:each="animal : ${animals}" th:value="${animal.id}" onclick="selectRow(event)">
                 <td th:text="${animal.type}"></td>
                 <td th:text="${animal.sex}"></td>
                 <td th:text="${animal.age}"></td>

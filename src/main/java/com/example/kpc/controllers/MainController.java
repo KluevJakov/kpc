@@ -1,9 +1,6 @@
 package com.example.kpc.controllers;
 
-import com.example.kpc.repositories.AnimalRepository;
-import com.example.kpc.repositories.BookRepository;
-import com.example.kpc.repositories.SickRepository;
-import com.example.kpc.repositories.UserRepository;
+import com.example.kpc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +11,8 @@ public class MainController {
 
     @Autowired
     protected UserRepository userRepository;
+    @Autowired
+    protected RoleRepository roleRepository;
     @Autowired
     protected AnimalRepository animalRepository;
     @Autowired
@@ -29,6 +28,7 @@ public class MainController {
     @GetMapping("/admin")
     public String admin(Model model) {
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("roles", roleRepository.findAll());
         return "admin";
     }
 

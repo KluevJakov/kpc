@@ -21,4 +21,10 @@ spring:
     init:
       platform: h2
       mode: never
+  spring:
+    servlet:
+      multipart:
+        max-file-size: 1024KB
+        max-request-size: 1024KB
+storage: /uploads
 # jdbc:h2:file:/data/demo
