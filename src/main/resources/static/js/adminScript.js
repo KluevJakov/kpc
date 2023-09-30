@@ -25,20 +25,35 @@ myModal.addEventListener('shown.bs.modal', function () {
             document.getElementById("phone").value = response.phone;
             document.getElementById("email").value = response.email;
             document.getElementById("password").value = response.password;
-            document.getElementById("avatar").value = response.avatar;
+            if (response.avatar != null && response.avatar.length != 0) {
+                photo.src = response.avatar;
+                document.getElementById("avatarStr").value = response.avatar;
+            } else {
+                photo.src = "/files/stub.png";
+                document.getElementById("avatarStr").value = "/files/stub.png";
+            }
             document.getElementById("activated").checked = response.activated;
             document.getElementById("role").value = response.role.id;
-            console.log(response.birthday.substr(0, 10));
         }
     } else {
         clearFields();
+        hideButtons();
     }
 });
 
 uploadBtn.addEventListener("change", handleFiles, false);
 function handleFiles() {
-    console.log(this.files);
     const fileList = this.files;
+    let xhr = new XMLHttpRequest();
+    let formData = new FormData();
+    formData.append("file", fileList[0]);
+    xhr.open('POST', '/upload', false);
+    xhr.send(formData);
+
+    if (xhr.status == 200) {
+        photo.src = xhr.responseText;
+        document.getElementById("avatarStr").value = xhr.responseText;
+    }
 }
 
 function selectRow (e) {
@@ -66,7 +81,7 @@ function save () {
     let phone = document.getElementById("phone").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    let avatar = document.getElementById("avatar").value;
+    let avatar = document.getElementById("avatarStr").value;
     let activated = document.getElementById("activated").checked;
     let role = document.getElementById("role").value;
 
@@ -122,13 +137,14 @@ function showButtons() {
 }
 
 function clearFields() {
-    photo.src = "#";
+    photo.src = "/files/stub.png";
     document.getElementById("fio").value = "";
     document.getElementById("birthday").value = "";
     document.getElementById("phone").value = "";
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
     document.getElementById("avatar").value = "";
+    document.getElementById("avatarStr").value = "/files/stub.png";
     document.getElementById("activated").checked = false;
     document.getElementById("role").value = "";
 }

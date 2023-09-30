@@ -1,11 +1,13 @@
 let editBtn = document.getElementById("edit");
 let deleteBtn = document.getElementById("delete");
+let uploadBtn = document.getElementById("avatar");
+let photo = document.getElementById("photo");
 var itemId = null;
 
 var myModal = document.getElementById('createModal');
 
 myModal.addEventListener('hide.bs.modal', function () {
-    document.getElementById("name").value = "";
+    clearFields();
 });
 
 myModal.addEventListener('shown.bs.modal', function () {
@@ -17,12 +19,40 @@ myModal.addEventListener('shown.bs.modal', function () {
 
         if (xhr.status == 200) {
             let response = JSON.parse(xhr.responseText);
-            document.getElementById("name").value = response.name;
+            photo.src = response.avatar;
+            document.getElementById("title").value = response.title;
+            document.getElementById("type").value = response.type;
+            document.getElementById("author").value = response.author;
+            document.getElementById("publishYear").value = response.publishYear;
+            document.getElementById("text").value = response.text;
+            if (response.avatar != null && response.avatar.length != 0) {
+                photo.src = response.avatar;
+                document.getElementById("avatarStr").value = response.avatar;
+            } else {
+                photo.src = "/files/stub.png";
+                document.getElementById("avatarStr").value = "/files/stub.png";
+            }
         }
     } else {
-        document.getElementById("name").value = "";
+        clearFields();
+        hideButtons();
     }
 });
+
+uploadBtn.addEventListener("change", handleFiles, false);
+function handleFiles() {
+    const fileList = this.files;
+    let xhr = new XMLHttpRequest();
+    let formData = new FormData();
+    formData.append("file", fileList[0]);
+    xhr.open('POST', '/upload', false);
+    xhr.send(formData);
+
+    if (xhr.status == 200) {
+        photo.src = xhr.responseText;
+        document.getElementById("avatarStr").value = xhr.responseText;
+    }
+}
 
 function selectRow (e) {
     Array.from(document.getElementsByTagName("tr")).forEach((el) => {
@@ -44,10 +74,21 @@ function selectRow (e) {
 }
 
 function save () {
-    let name = document.getElementById("name").value;
+    let title = document.getElementById("title").value;
+    let type = document.getElementById("type").value;
+    let author = document.getElementById("author").value;
+    let publishYear = document.getElementById("publishYear").value;
+    let text = document.getElementById("text").value;
+    let avatar = document.getElementById("avatarStr").value;
+
     let request = {
         "id": itemId,
-        "name": name
+        "title": title,
+        "type": type,
+        "author": author,
+        "publishYear": publishYear,
+        "text": text,
+        "avatar": avatar
     };
 
     let xhr = new XMLHttpRequest();
@@ -85,4 +126,15 @@ function hideButtons() {
 function showButtons() {
     editBtn.removeAttribute('disabled');
     deleteBtn.removeAttribute('disabled');
+}
+
+function clearFields() {
+    photo.src = "/files/stub.png";
+    document.getElementById("title").value = "";
+    document.getElementById("type").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("publishYear").value = "";
+    document.getElementById("text").value = "";
+    document.getElementById("avatar").value = "";
+    document.getElementById("avatarStr").value = "/files/stub.png";
 }

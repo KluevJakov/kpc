@@ -24,7 +24,7 @@ public class Book {
     protected String type;
     protected String author;
     protected String publishYear;
-    protected String photo;
+    protected String avatar;
     @Lob
     @Column(name = "text", columnDefinition = "CLOB")
     protected String text;

@@ -24,8 +24,9 @@ public class Animal {
     protected String sex;
     protected String age;
     protected String nickOrNumber;
+    protected String breed; //масть или примета
     protected String owner;
-    protected String photo;
+    protected String avatar;
 
     @Override
     public final boolean equals(Object o) {

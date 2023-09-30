@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <meta name="theme-color" content="#712cf9">
     <link href="/css/carousel.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -25,7 +26,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="text" id="name" placeholder="Название диагноза" class="form-control mb-2">
+                <img src="" id="photo" class="avatars"/>
+
+                <input type="text" id="type" placeholder="Вид животного" class="form-control mb-2">
+                <input type="text" id="sex" placeholder="Пол" class="form-control mb-2">
+                <input type="text" id="age" placeholder="Возраст" class="form-control mb-2">
+                <input type="text" id="nickOrNumber" placeholder="Кличка или номер бирки" class="form-control mb-2">
+                <input type="text" id="breed" placeholder="Масть или примета" class="form-control mb-2">
+                <input type="text" id="owner" placeholder="Название подразделения фермы (отделения) или ФИО владельца животного" class="form-control mb-2">
+                <input type="file" id="avatar" placeholder="Фото животного" class="form-control mb-2">
+                <input type="text" id="avatarStr" style="display: none;">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="save()">Сохранить</button>
@@ -81,6 +91,7 @@
             </thead>
             <tbody>
             <tr th:each="animal : ${animals}" th:value="${animal.id}" onclick="selectRow(event)">
+                <td th:text="${animal.id}"></td>
                 <td th:text="${animal.type}"></td>
                 <td th:text="${animal.sex}"></td>
                 <td th:text="${animal.age}"></td>

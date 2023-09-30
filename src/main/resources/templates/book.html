@@ -18,6 +18,7 @@
             crossorigin="anonymous"></script>
     <meta name="theme-color" content="#712cf9">
     <link href="/css/carousel.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -29,7 +30,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="text" id="name" placeholder="Название диагноза" class="form-control mb-2">
+                <img src="" id="photo" class="avatars"/>
+
+                <input type="text" id="title" placeholder="Название" class="form-control mb-2">
+                <input type="text" id="type" placeholder="Тип" class="form-control mb-2">
+                <input type="text" id="author" placeholder="Автор" class="form-control mb-2">
+                <input type="text" id="publishYear" placeholder="Год публикации" class="form-control mb-2">
+                <input type="file" id="avatar" placeholder="Фото обложки" class="form-control mb-2">
+                <input type="text" id="avatarStr"  style="display: none;">
+                <textarea id="text" placeholder="Текст справочника" class="form-control mb-2"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="save()">Сохранить</button>
