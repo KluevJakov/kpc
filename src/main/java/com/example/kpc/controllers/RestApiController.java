@@ -1,17 +1,18 @@
 package com.example.kpc.controllers;
 
+import com.example.kpc.configurations.Constants;
 import com.example.kpc.entity.Animal;
 import com.example.kpc.entity.Book;
+import com.example.kpc.entity.DTO.AuthResponse;
+import com.example.kpc.entity.DTO.AuthStatus;
 import com.example.kpc.entity.Sick;
 import com.example.kpc.entity.User;
-import com.example.kpc.repositories.AnimalRepository;
-import com.example.kpc.repositories.BookRepository;
-import com.example.kpc.repositories.SickRepository;
-import com.example.kpc.repositories.UserRepository;
+import com.example.kpc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,6 +27,8 @@ public class RestApiController {
     protected BookRepository bookRepository;
     @Autowired
     protected SickRepository sickRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     /* ------------------------------------------- */
 
@@ -116,4 +119,32 @@ public class RestApiController {
     }
 
     /* ------------------------------------------- */
+
+    @PostMapping("/reg")
+    public Boolean reg(@RequestBody User user) {
+        Optional<User> userCheck = userRepository.findByEmail(user.getEmail());
+
+        if (userCheck.isPresent()) {
+            return false;
+        }
+        user.setRole(roleRepository.getReferenceById(Constants.USER_ROLE_ID));
+        userRepository.save(user);
+        return true;
+    }
+
+    @PostMapping("/auth")
+    public AuthResponse auth(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password) {
+        Optional<User> user = userRepository.findByEmail(login);
+
+        if (user.isPresent()) {
+            if (user.get().getPassword().equals(password)) {
+                if (user.get().isActivated()) {
+                    return new AuthResponse(AuthStatus.SUCCESS.ordinal(), user.get());
+                }
+                return new AuthResponse(AuthStatus.DEACTIVATED_USER.ordinal(), null);
+            }
+            return new AuthResponse(AuthStatus.INCORRECT_PASSWORD.ordinal(), null);
+        }
+        return new AuthResponse(AuthStatus.NO_SUCH_USER.ordinal(), null);
+    }
 }

@@ -21,7 +21,9 @@ myModal.addEventListener('shown.bs.modal', function () {
             let response = JSON.parse(xhr.responseText);
             photo.src = response.avatar;
             document.getElementById("fio").value = response.fio;
-            document.getElementById("birthday").value = response.birthday.substr(0, 10);
+            if (response.birthday) {
+                document.getElementById("birthday").value = response.birthday.substr(0, 10);
+            }
             document.getElementById("phone").value = response.phone;
             document.getElementById("email").value = response.email;
             document.getElementById("password").value = response.password;
