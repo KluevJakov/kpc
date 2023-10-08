@@ -40,6 +40,7 @@ public class Disease {
     protected String internalShellStatus; //наружных покровов
     protected String lymphStatus; //наружных покровов
     /* ---------------исследование-------------- */
+    protected String gastroSystemResearch; //пищеварительной
     protected String breathSystemResearch; //дыхательной
     protected String heartSystemResearch; //сердечно-сосудистой
     protected String nervousSystemResearch; //нервной

@@ -1,12 +1,9 @@
 package com.example.kpc.controllers;
 
 import com.example.kpc.configurations.Constants;
-import com.example.kpc.entity.Animal;
-import com.example.kpc.entity.Book;
+import com.example.kpc.entity.*;
 import com.example.kpc.entity.DTO.AuthResponse;
 import com.example.kpc.entity.DTO.AuthStatus;
-import com.example.kpc.entity.Sick;
-import com.example.kpc.entity.User;
 import com.example.kpc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +26,8 @@ public class RestApiController {
     protected SickRepository sickRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private DiseaseRepository diseaseRepository;
 
     /* ------------------------------------------- */
 
@@ -116,6 +115,30 @@ public class RestApiController {
     @PostMapping("/user")
     public void saveSick(@RequestBody User user) {
         userRepository.save(user);
+    }
+
+    /* ------------------------------------------- */
+
+    @GetMapping("/disease")
+    public Disease getDisease(@RequestParam UUID diseaseId) {
+        return diseaseRepository.findById(diseaseId).get();
+    }
+
+    @DeleteMapping("/disease")
+    public void deleteDisease(@RequestParam UUID diseaseId) {
+        diseaseRepository.deleteById(diseaseId);
+    }
+
+    @GetMapping("/diseases")
+    public List<Disease> getDiseases() {
+        return diseaseRepository.findAll();
+    }
+
+    @PostMapping("/disease")
+    public void saveDisease(@RequestBody Disease disease) {
+        Sick sick = sickRepository.findByNameIgnoreCase(disease.getSick().getName()).get();
+        disease.setSick(sick);
+        diseaseRepository.save(disease);
     }
 
     /* ------------------------------------------- */
