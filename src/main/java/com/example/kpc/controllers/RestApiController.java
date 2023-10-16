@@ -28,6 +28,8 @@ public class RestApiController {
     private RoleRepository roleRepository;
     @Autowired
     private DiseaseRepository diseaseRepository;
+    @Autowired
+    private InspectRepository inspectRepository;
 
     /* ------------------------------------------- */
 
@@ -115,6 +117,26 @@ public class RestApiController {
     @PostMapping("/user")
     public void saveSick(@RequestBody User user) {
         userRepository.save(user);
+    }
+    /* ------------------------------------------- */
+    @GetMapping("/inspect")
+    public Inspect getInspect(@RequestParam UUID inspectId) {
+        return inspectRepository.findById(inspectId).get();
+    }
+
+    @DeleteMapping("/inspect")
+    public void deleteInspect(@RequestParam UUID inspectId) {
+        inspectRepository.deleteById(inspectId);
+    }
+
+    @GetMapping("/inspects")
+    public List<Inspect> getInspects() {
+        return inspectRepository.findAll();
+    }
+
+    @PostMapping("/inspect")
+    public void saveInspect(@RequestBody Inspect inspect) {
+        inspectRepository.save(inspect);
     }
 
     /* ------------------------------------------- */
