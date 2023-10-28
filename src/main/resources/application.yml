@@ -1,15 +1,11 @@
 spring:
-  h2:
-    console.enabled: true
-    settings:
-      web-allow-others: true
   datasource:
-    url: jdbc:h2:file:/dbs/db
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/kpc
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database: postgresql
     hibernate:
       ddl-auto: update
   thymeleaf:
@@ -18,16 +14,9 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
   application:
-    name: Bootstrap Spring Boot
-  sql:
-    init:
-      platform: h2
-      mode: always
-  spring:
-    servlet:
-      multipart:
-        max-file-size: 1024KB
-        max-request-size: 1024KB
+    name: KPC Application
+  servlet:
+    multipart:
+      max-file-size: 2048KB
+      max-request-size: 2048KB
 storage: /uploads
-
-# jdbc:h2:file:/data/demo

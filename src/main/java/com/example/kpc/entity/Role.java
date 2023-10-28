@@ -3,6 +3,7 @@ package com.example.kpc.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -14,8 +15,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@Builder
 @RequiredArgsConstructor
-public class Role {
+@AllArgsConstructor
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     protected UUID id;
@@ -37,5 +40,10 @@ public class Role {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }

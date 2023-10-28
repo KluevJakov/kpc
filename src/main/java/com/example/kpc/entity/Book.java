@@ -26,7 +26,7 @@ public class Book {
     protected String publishYear;
     protected String avatar;
     @Lob
-    @Column(name = "text", columnDefinition = "CLOB")
+    @Column(name = "text")
     protected String text;
 
     @Override

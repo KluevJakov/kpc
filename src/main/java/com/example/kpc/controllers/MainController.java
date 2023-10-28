@@ -49,4 +49,9 @@ public class MainController {
         model.addAttribute("animals", animalRepository.findAll());
         return "animal";
     }
+
+    @GetMapping("/successLogin")
+    public String successLogin() {
+        return "redirect:/admin";
+    }
 }
