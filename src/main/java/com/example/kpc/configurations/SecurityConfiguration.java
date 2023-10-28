@@ -41,6 +41,7 @@ public class SecurityConfiguration {
                     .requestMatchers("/api/**").permitAll()
                     .requestMatchers("/files/**").permitAll()
                     .requestMatchers("/upload/**").permitAll()
+                    .requestMatchers("/qr").permitAll()
                     .anyRequest().authenticated()
             )
             .formLogin(e -> {

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
@@ -53,5 +54,11 @@ public class MainController {
     @GetMapping("/successLogin")
     public String successLogin() {
         return "redirect:/admin";
+    }
+
+    @GetMapping("/qr")
+    public String successLogin(@RequestParam(required = false) String id, Model model) {
+        model.addAttribute("id", id);
+        return "qr";
     }
 }
