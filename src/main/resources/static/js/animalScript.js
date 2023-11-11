@@ -156,3 +156,18 @@ function qr() {
     const myModal = new bootstrap.Modal(document.getElementById('qrModal'), {});
     myModal.show();
 }
+
+function printMe() {
+    printDiv("qrcode");
+}
+
+function printDiv(printDivName) {
+    var headStr = "<html><head><title>QR</title></head><body>";
+    var footStr = "</body>";
+    var newStr = document.getElementById(printDivName).innerHTML;
+    var oldStr = document.body.innerHTML;
+    document.body.innerHTML = headStr + newStr + footStr;
+    window.print();
+    location.href = "/animal";
+    return false;
+}
