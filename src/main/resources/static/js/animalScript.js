@@ -1,5 +1,6 @@
 let editBtn = document.getElementById("edit");
 let deleteBtn = document.getElementById("delete");
+let qrBtn = document.getElementById("qr");
 let uploadBtn = document.getElementById("avatar");
 let photo = document.getElementById("photo");
 var itemId = null;
@@ -124,11 +125,13 @@ function remove () {
 function hideButtons() {
     editBtn.setAttribute('disabled', '');
     deleteBtn.setAttribute('disabled', '');
+    qrBtn.setAttribute('disabled', '');
 }
 
 function showButtons() {
     editBtn.removeAttribute('disabled');
     deleteBtn.removeAttribute('disabled');
+    qrBtn.removeAttribute('disabled');
 }
 
 function clearFields() {
@@ -141,4 +144,15 @@ function clearFields() {
     document.getElementById("owner").value = "";
     document.getElementById("avatar").value = "";
     document.getElementById("avatarStr").value = "/files/stub.png";
+}
+
+function qr() {
+    document.getElementById("qrcode").innerHTML = "";
+    new QRCode(document.getElementById("qrcode"), {
+        text: location.origin + "/qr?id=" + itemId,
+        width: 512,
+        height: 512
+    });
+    const myModal = new bootstrap.Modal(document.getElementById('qrModal'), {});
+    myModal.show();
 }
