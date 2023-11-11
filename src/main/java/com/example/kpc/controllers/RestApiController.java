@@ -84,6 +84,8 @@ public class RestApiController {
 
     @DeleteMapping("/animal")
     public void deleteAnimal(@RequestParam UUID animalId) {
+        inspectRepository.deleteByAnimalId(animalId);
+        diseaseRepository.deleteByAnimalId(animalId);
         animalRepository.deleteById(animalId);
     }
 
@@ -93,8 +95,8 @@ public class RestApiController {
     }
 
     @PostMapping("/animal")
-    public void saveAnimal(@RequestBody Animal animal) {
-        animalRepository.save(animal);
+    public Animal saveAnimal(@RequestBody Animal animal) {
+        return animalRepository.save(animal);
     }
 
     /* ------------------------------------------- */
