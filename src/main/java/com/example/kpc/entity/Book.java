@@ -25,23 +25,18 @@ public class Book {
     protected String author;
     protected String publishYear;
     protected String avatar;
-    @Lob
-    @Column(name = "text")
-    protected String text;
+    protected String file;
 
     @Override
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id != null && Objects.equals(id, book.id);
+        return Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(type, book.type) && Objects.equals(author, book.author) && Objects.equals(publishYear, book.publishYear) && Objects.equals(avatar, book.avatar) && Objects.equals(file, book.file);
     }
 
     @Override
-    public final int hashCode() {
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    public int hashCode() {
+        return Objects.hash(id, title, type, author, publishYear, avatar, file);
     }
 }

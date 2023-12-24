@@ -23,22 +23,22 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        roleRepository.insertRole(Constants.USER_ROLE_ID,
-                "USER",
-                "Пользователь");
-
-        roleRepository.insertRole(Constants.ADMIN_ROLE_ID,
-                "ADMIN",
-                "Администратор");
-
-        userRepository.insertUser(Constants.ADMIN_USER_ID,
-                true,
-                "",
-                new Date(),
-                "admin@admin.com",
-                "Админов Админ Админович",
-                "password",
-                "+79991323432",
-                Constants.ADMIN_ROLE_ID);
+//        roleRepository.insertRole(Constants.USER_ROLE_ID,
+//                "USER",
+//                "Пользователь");
+//
+//        roleRepository.insertRole(Constants.ADMIN_ROLE_ID,
+//                "ADMIN",
+//                "Администратор");
+//
+//        userRepository.insertUser(Constants.ADMIN_USER_ID,
+//                true,
+//                "",
+//                new Date(),
+//                "admin@admin.com",
+//                "Админов Админ Админович",
+//                "password",
+//                "+79991323432",
+//                Constants.ADMIN_ROLE_ID);
     }
 }

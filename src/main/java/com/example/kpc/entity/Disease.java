@@ -24,26 +24,39 @@ public class Disease {
     protected Date dateStart; //дата возникновения
     protected Date dateEnd; //дата окончания
     protected Date dateToTherapy; //дата поступления на стационарное лечение
+    @Column(length = 6000)
     protected String firstDiagnosis; //первоначальный диагноз
+    @Column(length = 6000)
     protected String secondDiagnosis; //последующий диагноз
+    @Column(length = 6000)
     protected String anamnesis; //анамнез
 
     /* ----------------------------------------- */
     protected float temperature; //температура
     protected int pulse; //пульс
     protected int breath; //дыхание
+    @Column(length = 6000)
     protected String commonHealth; //общее состояние
+    @Column(length = 6000)
     protected String fatness; //упитанность
 
     /* -----------------состояние--------------- */
+    @Column(length = 6000)
     protected String externalSkinStatus; //наружных покровов
+    @Column(length = 6000)
     protected String internalShellStatus; //наружных покровов
+    @Column(length = 6000)
     protected String lymphStatus; //наружных покровов
     /* ---------------исследование-------------- */
+    @Column(length = 6000)
     protected String gastroSystemResearch; //пищеварительной
+    @Column(length = 6000)
     protected String breathSystemResearch; //дыхательной
+    @Column(length = 6000)
     protected String heartSystemResearch; //сердечно-сосудистой
+    @Column(length = 6000)
     protected String nervousSystemResearch; //нервной
+    @Column(length = 6000)
     protected String urogenitalSystemResearch; //мочеполовой
 
     /* ----------------------------------------- */

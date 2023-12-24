@@ -8,6 +8,9 @@ spring:
     database: postgresql
     hibernate:
       ddl-auto: update
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
   thymeleaf:
     cache: false
     enabled: true
@@ -17,6 +20,6 @@ spring:
     name: KPC Application
   servlet:
     multipart:
-      max-file-size: 2048KB
-      max-request-size: 2048KB
+      max-file-size: 200MB
+      max-request-size: 200MB
 storage: /uploads

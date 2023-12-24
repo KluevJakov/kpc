@@ -1,6 +1,7 @@
 let editBtn = document.getElementById("edit");
 let deleteBtn = document.getElementById("delete");
 let uploadBtn = document.getElementById("avatar");
+let uploadBtn2 = document.getElementById("file");
 let photo = document.getElementById("photo");
 var itemId = null;
 
@@ -24,13 +25,19 @@ myModal.addEventListener('shown.bs.modal', function () {
             document.getElementById("type").value = response.type;
             document.getElementById("author").value = response.author;
             document.getElementById("publishYear").value = response.publishYear;
-            document.getElementById("text").value = response.text;
+
             if (response.avatar != null && response.avatar.length != 0) {
                 photo.src = response.avatar;
                 document.getElementById("avatarStr").value = response.avatar;
             } else {
                 photo.src = "/files/stub.png";
                 document.getElementById("avatarStr").value = "/files/stub.png";
+            }
+
+            if (response.file != null && response.file.length != 0) {
+                document.getElementById("fileStr").value = response.file;
+            } else {
+                document.getElementById("fileStr").value = "";
             }
         }
     } else {
@@ -40,6 +47,7 @@ myModal.addEventListener('shown.bs.modal', function () {
 });
 
 uploadBtn.addEventListener("change", handleFiles, false);
+uploadBtn2.addEventListener("change", handleFiles2, false);
 function handleFiles() {
     const fileList = this.files;
     let xhr = new XMLHttpRequest();
@@ -51,6 +59,18 @@ function handleFiles() {
     if (xhr.status == 200) {
         photo.src = xhr.responseText;
         document.getElementById("avatarStr").value = xhr.responseText;
+    }
+}
+function handleFiles2() {
+    const fileList = this.files;
+    let xhr = new XMLHttpRequest();
+    let formData = new FormData();
+    formData.append("file", fileList[0]);
+    xhr.open('POST', '/upload', false);
+    xhr.send(formData);
+
+    if (xhr.status == 200) {
+        document.getElementById("fileStr").value = xhr.responseText;
     }
 }
 
@@ -78,7 +98,7 @@ function save () {
     let type = document.getElementById("type").value;
     let author = document.getElementById("author").value;
     let publishYear = document.getElementById("publishYear").value;
-    let text = document.getElementById("text").value;
+    let file = document.getElementById("fileStr").value;
     let avatar = document.getElementById("avatarStr").value;
 
     let request = {
@@ -87,7 +107,7 @@ function save () {
         "type": type,
         "author": author,
         "publishYear": publishYear,
-        "text": text,
+        "file": file,
         "avatar": avatar
     };
 
@@ -134,7 +154,8 @@ function clearFields() {
     document.getElementById("type").value = "";
     document.getElementById("author").value = "";
     document.getElementById("publishYear").value = "";
-    document.getElementById("text").value = "";
+    document.getElementById("file").value = "";
+    document.getElementById("fileStr").value = "";
     document.getElementById("avatar").value = "";
     document.getElementById("avatarStr").value = "/files/stub.png";
 }

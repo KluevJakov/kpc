@@ -6,6 +6,7 @@ import org.hibernate.proxy.HibernateProxy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /* сущность пользователя */
@@ -24,7 +25,7 @@ public class User implements UserDetails {
     protected UUID id;
 
     protected String fio;
-    protected Date birthday;
+    protected LocalDate birthday;
     protected String phone;
     protected String email;
     protected String password;

@@ -36,9 +36,12 @@
                 <input type="text" id="type" placeholder="Тип" class="form-control mb-2">
                 <input type="text" id="author" placeholder="Автор" class="form-control mb-2">
                 <input type="text" id="publishYear" placeholder="Год публикации" class="form-control mb-2">
+                <label for="avatar">Фото обложки</label>
                 <input type="file" id="avatar" placeholder="Фото обложки" class="form-control mb-2">
-                <input type="text" id="avatarStr"  style="display: none;">
-                <textarea id="text" placeholder="Текст справочника" class="form-control mb-2"></textarea>
+                <input type="text" id="avatarStr" style="display: none;">
+                <label for="file">Файл справочника (в формате pdf)</label>
+                <input type="file" id="file" placeholder="PDF Файл" class="form-control mb-2" accept="application/pdf">
+                <input type="text" id="fileStr" style="display: none;">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="save()">Сохранить</button>
