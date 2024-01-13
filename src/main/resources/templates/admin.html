@@ -95,7 +95,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${users}" th:value="${user.id}" onclick="selectRow(event)">
+            <tr th:each="user : ${users}" th:value="${user.id}" onclick="selectRow(event)"  style="cursor: pointer;">
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.fio}"></td>
                 <td th:text="${user.birthday}"></td>

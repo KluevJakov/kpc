@@ -149,7 +149,7 @@ function clearFields() {
 function qr() {
     document.getElementById("qrcode").innerHTML = "";
     new QRCode(document.getElementById("qrcode"), {
-        text: location.origin + "/qr?id=" + itemId,
+        text: itemId,
         width: 512,
         height: 512
     });

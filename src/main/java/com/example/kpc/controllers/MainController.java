@@ -55,10 +55,4 @@ public class MainController {
     public String successLogin() {
         return "redirect:/admin";
     }
-
-    @GetMapping("/qr")
-    public String successLogin(@RequestParam(required = false) String id, Model model) {
-        model.addAttribute("id", id);
-        return "qr";
-    }
 }

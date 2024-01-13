@@ -83,7 +83,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="sick : ${sicks}" th:value="${sick.id}" onclick="selectRow(event)">
+            <tr th:each="sick : ${sicks}" th:value="${sick.id}" onclick="selectRow(event)"  style="cursor: pointer;">
                 <td th:text="${sick.id}"></td>
                 <td th:text="${sick.name}"></td>
             </tr>
